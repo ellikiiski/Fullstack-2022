@@ -5,7 +5,7 @@
 Linkki [kurssimateriaaliin](https://fullstackopen.com/), joka varmaankin saattaa muuttua vuosien varrella.
 
 #### TEHTÄVÄT
-* [OSA 0](https://github.com/ellikiiski) (4-6)
+* [OSA 0](https://github.com/ellikiiski/Fullstack-2022/tree/main/osa-0) (4-6)
 * [OSA 1](https://github.com/ellikiiski)
   * [Kurssitiedot](https://github.com/ellikiiski) (1-5)
   * [Unicafe](https://github.com/ellikiiski) (6-11)
