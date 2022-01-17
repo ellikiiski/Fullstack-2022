@@ -1,7 +1,7 @@
-# Fullstack 2020
+# Fullstack 2022
 #### Fullstack tuo, fullstack tuo, fullstack tuo töitä jokaisen luo
 
-### Kurssi Fullstack open 2020
+### Kurssi Fullstack open 2022
 Linkki [kurssimateriaaliin](https://fullstackopen.com/), joka varmaankin saattaa muuttua vuosien varrella.
 
 #### TEHTÄVÄT
