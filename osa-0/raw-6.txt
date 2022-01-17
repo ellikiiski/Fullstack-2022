@@ -1,0 +1,13 @@
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over palvelin:
+palvelin saa pyynnön mukana muistiin-
+panon valmiiksi JSON-muodossa
+end note
+
+palvelin-->selain: statuskoodi 201 created
+
+note over selain:
+uusi muistiinpano päivittyy ilman
+HTML-sivun uudelleenlataamista
+end note
