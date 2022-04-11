@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import contactService from './services/persons'
 
-const Contact = ({ name, number }) => {
+const Contact = ({ person, persons, setPersons }) => {
+
+  const deleteName = (event) => {
+    event.preventDefault()
+    contactService.delevittute(person.id).then(deletedContact => {
+      setPersons(persons.filter(p => p.id !== deletedContact.id))
+    })
+}
+
   return (
     <div>
-      <p>{name} {number}</p>
+      <p>
+        {person.name} {person.number} <button onClick={deleteName}>delete</button>
+      </p>
     </div>
   )
 }
 
-const AllContacts = ({ persons }) => {
+const AllContacts = ({ persons, setPersons }) => {
   return (
     <div>
-      {persons.map(person => <Contact key={person.name} name={person.name} number={person.number} />)}
+      {persons.map(person => <Contact key={person.name} person={person} persons={persons} setPersons={setPersons} />)}
     </div>
   )
 }
@@ -36,18 +46,22 @@ const Form = ({ addFunc, nameVariable, nameFunc, numberVariable, numberFunc}) =>
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([])  
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
+    contactService.getAll().then(initialPersons => {
+      setPersons(initialPersons)
+    })
   }, [])
+
+  useEffect(() => {
+    contactService.getAll().then(initialPersons => {
+      setPersons(initialPersons)
+    })
+  }, [persons])
 
   const addNew = (event) => {
     event.preventDefault()
@@ -56,7 +70,9 @@ const App = () => {
       window.alert(`${newName} is already added to phonebook`);
     } else {
       const newPerson = { name: newName , number: newNumber}
-      setPersons(persons.concat(newPerson))
+      contactService.create(newPerson).then(returnedContact => {
+        setPersons(persons.concat(returnedContact))
+      })
       setNewNumber('')
       setNewName('')
     }
@@ -84,10 +100,9 @@ const App = () => {
       <Form addFunc={addNew} nameVariable={newName} numberVariable={newNumber}
         nameFunc={handleNewName} numberFunc={handleNewNumber} />
       <h2>Numbers</h2>
-      <AllContacts persons={filteredPersons} />
+      <AllContacts persons={filteredPersons} persons={persons} setPersons={setPersons} />
     </div>
   )
-
 }
 
 export default App
